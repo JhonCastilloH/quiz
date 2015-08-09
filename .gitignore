@@ -43,4 +43,6 @@ Temporary Items
 .apdisk
 
 # quiz.sqlite
+npm-debug.log
 quiz.sqlite
+.env
