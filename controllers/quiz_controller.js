@@ -1,4 +1,5 @@
 var models = require('../models/models.js');
+
 // get quizes / question
 exports.index= function(req, res){
 	models.Quiz.findAll().then(function(quizes){
@@ -7,11 +8,17 @@ exports.index= function(req, res){
 };
 
 
+// get quizes / question
+exports.show= function(req, res){
+	models.Quiz.find(req.params.quizId).then(function(quiz){
+		res.render('quizes/show',{quiz: quiz});
+	})
+};
 
 
 // get quizes / answer
-exports.answer= function(req, res){
 
+exports.answer= function(req, res){
 	models.Quiz.find(req.params.quizId).then(function(quiz){
 		if (req.query.respuesta===quiz.respuesta){
 			res.render('quizes/answer',{quiz:quiz,respuesta:'Correcta'}) 
