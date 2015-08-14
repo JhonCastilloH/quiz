@@ -61,6 +61,12 @@ exports.show= function(req, res){
 		res.render('quizes/show',{quiz: req.quiz, errors: []});
 };
 
+// get quizes / new
+exports.edit= function(req, res){
+	var quiz = req.quiz; //autoload de instancia quiz
+	res.render('quizes/edit',{quiz:quiz, errors: []});
+};
+
 
 // get quizes / answer
 exports.answer= function(req, res){
@@ -69,4 +75,29 @@ exports.answer= function(req, res){
 			resultado='Correcto';
 		}
 			res.render('quizes/answer',{quiz:req.quiz,respuesta:resultado, errors: []}) 
+};
+
+// get quizes / create
+exports.update = function(req, res){
+req.quiz.pregunta = req.body.quiz.pregunta;
+req.quiz.respuesta = req.body.quiz.respuesta;
+
+var errors = req.quiz.validate();//ya qe el objeto errors no tiene then(
+if (errors)
+{
+var i=0; var errores=new Array();//se convierte en [] con la propiedad message por compatibilida con layout
+for (var prop in errors) errores[i++]={message: errors[prop]};	
+res.render('quizes/new', {quiz: req.quiz, errors: errores});
+} else {
+req.quiz // save: guarda en DB campos pregunta y respuesta de quiz
+.save({fields: ["pregunta", "respuesta"]})
+.then( function(){ res.redirect('/quizes')}) ;
+}   //rediraccion HTTP a lista de preguntas (URL relativo)
+};
+
+// get quizes / new
+exports.destroy= function(req, res){
+	req.quiz.destroy().then(function() {
+	res.redirect('/quizes');
+	}).catch(function(error){next(error)});
 };
