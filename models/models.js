@@ -40,11 +40,11 @@ Quiz.count().success(function(count){
 	if (count === 0) {// la tabla se inicializa solo su esta vacia
 	Quiz.create({ pregunta: 'Capital de Italia',
 				  respuesta: 'Roma',
-				  tema: 'Sociales'
+				  tema: 'Ocio'
 				  });
 	Quiz.create({ pregunta: 'Capital de Portugal',
 				  respuesta: 'Lisboa',
-				  tema: 'Sociales'
+				  tema: 'Ocio'
 				  })
 	.then(function(){console.log('Base de datos inicializada')});
 		};
