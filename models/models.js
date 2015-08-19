@@ -32,7 +32,7 @@ var quiz_path = path.join(__dirname,'quiz');
 var Quiz = sequelize.import(quiz_path);
 
 //Importar definicion de la tabla Comment
-var comment_path = path.join(__dirname,'quiz');
+var comment_path = path.join(__dirname,'comment');
 var Comment = sequelize.import(comment_path);
 
 Comment.belongsTo(Quiz);
