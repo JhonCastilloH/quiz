@@ -38,7 +38,7 @@ router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish',
 //router.get('/quizes/answer',quizController.answer);
 
 router.get('/author', function(req, res) {
-  res.render('author', { title: 'Creditos'});
+  res.render('author', { title: 'Creditos', errors: []});
 });
 
 
